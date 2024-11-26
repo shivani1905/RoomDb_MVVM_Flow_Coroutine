@@ -171,35 +171,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    fun openMap(latitude: Double, longitude: Double) {
-        // Create a URI for the latitude and longitude
-        val uri = Uri.parse("geo:$latitude,$longitude?q=$latitude,$longitude")
-        // Create an Intent to open Google Maps
-        val intent = Intent(Intent.ACTION_VIEW, uri)
-        intent.setPackage("com.google.android.apps.maps") // Optional: Ensures it opens in Google Maps app
-
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        } else {
-            // Handle case where Google Maps app is not available
-            Toast.makeText(this, "Google Maps is not installed", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun showAlertDialog(lat: Double, lng: Double) {
-        val alertDialog = AlertDialog.Builder(this)
-
-        alertDialog.apply {
-            //setIcon(R.drawable.ic_hello)
-            setTitle(getString(R.string.app_name))
-            setMessage("User want to see that user on map")
-            setPositiveButton("Yes") { _: DialogInterface?, _: Int ->
-               openMap(lat,lng)
-            }
-            setNegativeButton("No") { _, _ ->
-                Toast.makeText(context, "Negative", Toast.LENGTH_SHORT).show()
-            }
-
-        }.create().show()
-    }
 }
